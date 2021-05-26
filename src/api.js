@@ -38,36 +38,19 @@ async function getRepoInfo(auth, repoList, username) {
     },
   };
 
-  const getAll = (endpoint) => {
-    return repoList.map(async (repoName) => {
+  const getAll = async (endpoint) => {
+    const promiseArr = repoList.map(async (repoName) => {
       const url = new URL(`/repos/${username}/${repoName}/${endpoint}`, BASE_URL);
-      const response = await fetch(url.href, options);
-      return response;
+      const result = await fetch(url.href, options);
+      return await result.json();
     });
-  }
 
-  const toJson = (arr) => {
-    return arr.map( async (response) => {
-      const responseJson = await response.json();
-      return responseJson;
-    });
+    return await Promise.all(promiseArr);
   }
 
   let data;
   try {
-    const collaboratorsPromise = getAll('collaborators');
-    const pullsPromise = getAll('pulls');
-  
-    const collaboratorsRes = await Promise.all(collaboratorsPromise);
-    const pullsRes = await Promise.all(pullsPromise);
-  
-    const collaboratorsRaw = toJson(collaboratorsRes);
-    const pullsRaw = toJson(pullsRes);
-  
-  
-    const collaborators = await Promise.all(collaboratorsRaw);
-    const pulls = await Promise.all(pullsRaw);
-  
+    const [collaborators, pulls] = await Promise.all([getAll('collaborators'), getAll('pulls')]);
   
     data = pulls.map((repoPulls, index) => {
       const repoName = repoList[index];
