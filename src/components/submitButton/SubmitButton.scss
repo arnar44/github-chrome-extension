@@ -1,0 +1,11 @@
+@import '../../config.scss';
+
+.submitButton {
+    padding: 3px 12px;
+    font-weight: bold;
+    color: $color-white;
+    cursor: pointer;
+    background-color: $color-sub;
+    border: 1px solid $color-font;
+    border-radius: 5px;
+}

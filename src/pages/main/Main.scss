@@ -1,0 +1,33 @@
+@import '../../config.scss';
+
+.pulls {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  &__filters {
+    display: flex;
+    margin: 15px 0 15px 5px;
+    justify-content: space-around;
+  }
+
+  &__list {
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+  }
+}
+
+.pullDetails {
+  margin: 0 10px;
+
+  &__forms {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5 * $gutter;
+  }
+
+  &__hidden {
+    display: none;
+  }
+}

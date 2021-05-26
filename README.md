@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+## Setup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+First you need to fetch the project which can be done cloning the repository with git.
 
-## Available Scripts
+```bash
+$ git clone https://github.com/arnar44/github-chrome-extension.git
+```
 
-In the project directory, you can run:
+Next the dependancies for the project need to be installed, which can be done with yarn or npm.
 
-### `yarn start`
+```bash
+$ npm install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+After dependancies have been installed, you will need to build the app and load it to your chrome browser. First run:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+$ npm run buildApp
+```
 
-### `yarn test`
+When the app has been built, you should see a "build" directory in the project directory. Now open your browser and press the chrome extensions logo which should be in the top right corner of the browser:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ ![alt text](./screenshots/extensionsLogo.png "Extensions Logo")
 
-### `yarn build`
+ Then press "Manage Extensions".
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ On the extensions page, make sure "Developer mode" is turned on. The option to toggle it on/off should be in the top right corner of the page:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  ![alt text](./screenshots/developerMode.png "Developer Mode")
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  No you can press "Load unpacked" in the top left corner. 
+  ![alt text](./screenshots/loadUnpacked.png "Load unpacked")
 
-### `yarn eject`
+  You should navigate to the project directory and select the "build" folder which you produced earlier. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  By pressing the extensions logo you should now see our chrome extension there and you can pin it so it stays visible next to your other extensions. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  Now you are all set and can start using the chrome extension!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  ## Using the extension
+  To be able to use the extension you will need to generate a [Github access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token). You need to make sure that the scope of the token includes access to reporitories and invite/remove authorization for repository collaborators and pull requests requested reviewers. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  When you open the extension for the first time you need to submit your username and access token. After that you need to select repositories to view. 
 
-## Learn More
+  Pull requests for those repositories will be fetched and listed, you can select a pull request and:
+- Add/remove collaborators for the repository in which the pull request is in.
+- Add/remove requested reviewers for each of the pull requests.
+- Set a reminder to remind you to take a look at the pull request again in 5 minutes.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Tools and architecture
+The extension is built with the React library and was bootstrapped with Create React App.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Stylesheets
+Not much emphasis on design and style.
+Stylesheets are written in scss and scss variables are placed in config.scss
 
-### Code Splitting
+### Hooks
+Hooks are used to manage state and make asynchronous calls to Github API.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Pages
+The logic for the app is in App.js aswell as in the three pages:
 
-### Analyzing the Bundle Size
+- Login.js
+- SelectRepos.js
+- Main.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+App.js contains the hooks for username, access token and selected repositories. It shows:
+- Login if it does not possess the users username and token.
+- SelectRepos if it does not posses which repositories the user has selected.
+- Main if it has all of username, token and repositories.
 
-### Making a Progressive Web App
+Hook for data is stored in Main.js. The data is either fetched from the chrome storage to limit requests made to Github or fetched via the Github REST API. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Background
+The background directory contains one file, index.js. It is the background script the extension uses, it currently only contains one event listener which listens for chrome alarms. 
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## TODOS
+Additional features to add to extension:
+- Ability to cancel alarms.
+- Ability to re-select which repositories to view.
+- Change alarms to notifications from extension, currently displayed as an alert.
+- Not only list pull request, but issues as well. 
+- Push notifications to inform user of new pull requests and events.
+- Hash information in chrome storage or store data on a server.

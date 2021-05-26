@@ -1,0 +1,30 @@
+@import '../../config.scss';
+
+.selectRepos {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  flex-direction: column;
+
+  &__heading {
+    margin-bottom: 0.5 * $gutter;
+  }
+
+  &__content {
+    display: flex;
+    height: 100%;
+    margin-bottom: 0.5 * $gutter;
+    flex-direction: column;
+  }
+
+  &__filters {
+    margin-bottom: 0.5 * $gutter;
+  }
+
+  &__list {
+    height: 100%;
+    overflow: auto;
+    list-style-type: none;
+  }
+}

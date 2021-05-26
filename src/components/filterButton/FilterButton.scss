@@ -1,0 +1,18 @@
+@import '../../config.scss';
+
+.filterButton {
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: $color-item;
+    border: 0;
+    border: 1.5px solid $color-item-border;
+    border-radius: 5px;
+    box-shadow: 1px 1px $color-item;
+}
+
+.filterButton:hover {
+    color: $color-white;
+    background-color: $color-item-border;
+    transition: $transition;
+}

@@ -1,0 +1,36 @@
+@import '../../config.scss';
+
+.header {
+    display: flex;
+    min-height: $gutter;
+    background-color: $color-heading;
+    border-bottom: 1px solid $color-background;
+
+    &__title {
+        padding-top: 9px;
+        padding-left: 9px;
+        font-size: 16px;
+        color: $color-white;
+    }
+
+    &__tabs {
+        display: flex;
+        width: 180px;
+        margin: auto 2 * $gutter 0 auto;
+    }
+
+    &__tab {
+        width: 50%;
+        height: 100%;
+        padding: 4px 0;
+        font-size: 12px;
+        text-align: center;
+        cursor: pointer;
+        background-color: $color-tabs;
+    }
+}
+
+.active {
+    color: $color-font;
+    background-color: $color-background;
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-primer",
+  "rules": {
+    "indentation": [
+      2,
+      {
+        "message": "Please use 2 spaces for indentation",
+        "severity": "warning"
+      }
+    ],
+    "string-quotes": ["single"],
+    "selector-max-type": [1]
+  }
+}

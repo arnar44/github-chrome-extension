@@ -1,0 +1,27 @@
+@import '../../config.scss';
+
+.pullHead {
+  display: flex;
+  padding: 10px;
+  margin: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: $color-tabs;
+  border: 1px solid $color-tabs;
+  border-radius: 10px;
+  box-shadow: 1px 1px $color-tabs;
+  justify-content: space-between;
+}
+
+.pullItem {
+  &__icon {
+    padding: 0 5px;
+    background-color: $color-item;
+    border: 1.5px solid $color-item-border;
+    border-radius: 5px;
+  }
+
+  &__link {
+    text-decoration: underline;
+  }
+}

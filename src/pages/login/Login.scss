@@ -1,0 +1,28 @@
+@import '../../config.scss';
+
+.login {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+
+  &__input {
+    padding: 6px 12px;
+    margin-bottom: 0.3 * $gutter; 
+    border: 1px solid $color-font;
+    border-radius: 3px;
+  }
+
+  &__button {
+    padding: 6px 12px;
+    font-weight: bold;
+    color: $color-white;
+    cursor: pointer;
+    background-color: $color-sub;
+    border: 1px solid $color-font;
+    border-radius: 5px;
+  }
+
+}
